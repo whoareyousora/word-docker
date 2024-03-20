@@ -1,0 +1,5 @@
+groups:
+- name: example
+  rules:
+  - record: api_request_duration_seconds
+    expr: histogram_qantile(0.95, sum(rate(api_request_duration_seconds_bucket{job="api"}[5m])) by (le))

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./web
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - auth
+      - payment
+
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: app
+
+  auth:
+    build: ./auth
+    ports:
+      - "4000:4000"
+
+  payment:
+    build: ./payment
+    ports:
+      - "5000:5000"
